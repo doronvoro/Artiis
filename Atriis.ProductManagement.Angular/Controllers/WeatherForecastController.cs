@@ -30,4 +30,5 @@ namespace Atriis.ProductManagement.Angular.Controllers
             .ToArray();
         }
     }
+
 }
