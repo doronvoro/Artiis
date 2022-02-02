@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artiis.API", "Artiis.API\Artiis.API.csproj", "{A201FB0D-7C3E-4BD6-A809-F071473FB5FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artiis.API", "Artiis.API\Artiis.API.csproj", "{A201FB0D-7C3E-4BD6-A809-F071473FB5FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atriis.ProductManagement.BL", "Atriis.ProductManagement\Atriis.ProductManagement.BL.csproj", "{C26D2063-EFE6-4E33-90B6-DA75FDE29F12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atriis.ProductManagement.BL", "Atriis.ProductManagement\Atriis.ProductManagement.BL.csproj", "{C26D2063-EFE6-4E33-90B6-DA75FDE29F12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atriis.ProductManagement.Angular", "Atriis.ProductManagement.Angular\Atriis.ProductManagement.Angular.csproj", "{2E3CC439-5A1F-4EFC-98FB-1F74A2E94EC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{C26D2063-EFE6-4E33-90B6-DA75FDE29F12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C26D2063-EFE6-4E33-90B6-DA75FDE29F12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C26D2063-EFE6-4E33-90B6-DA75FDE29F12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E3CC439-5A1F-4EFC-98FB-1F74A2E94EC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E3CC439-5A1F-4EFC-98FB-1F74A2E94EC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E3CC439-5A1F-4EFC-98FB-1F74A2E94EC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E3CC439-5A1F-4EFC-98FB-1F74A2E94EC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

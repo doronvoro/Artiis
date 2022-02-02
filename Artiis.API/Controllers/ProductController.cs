@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Artiis.API.Controllers
 {
-    // vs 22
+    // vs 22 v ??.??
     //instull node js
     //npm install -g @angular/cli
 
@@ -12,40 +12,58 @@ namespace Artiis.API.Controllers
     //npm ERR! gyp verb `which` failed
 }
 
-//product management 
+//todo: change project naem to product management API
 //
-[ApiController]
-    [Route("[controller]")]
-    public class ProductsController : ControllerBase
+
+public static class ControllerBaseExten
+{
+    public static ObjectResult InternalServerError(this ProductsController controller, Exception ex)
     {
-        private readonly IProductManager _productManager;
-        private readonly ILogger<ProductsController> _logger;
+        //todo: create base class for Controller or middlwhere
+        //  controller._logger.LogCritical("", ex);
+        // todo: fix this
+        // todo: check for Exception details
+        //todo: return error number for trecking
+        var result = controller.StatusCode((int)StatusCodes.Status500InternalServerError, ex);
+        return result;
+    }
 
-        public ProductsController(IProductManager productManager, 
-                                 ILogger<ProductsController> logger)
+
+}
+
+[ApiController]
+[Route("[controller]")]
+public class ProductsController : ControllerBase
+{
+    private readonly IProductManager _productManager;
+    protected readonly ILogger<ProductsController> _logger;
+
+    public ProductsController(IProductManager productManager,
+                             ILogger<ProductsController> logger)
+    {
+        _productManager = productManager;
+        _logger = logger;
+    }
+
+
+    // [Route("~/api/[Controller]/Filter/{productName=}")]
+    //todo:
+    //fix Route 
+    //[controller] => to function
+    //check new error for ? nullbale
+    [HttpGet("[controller]")]
+    public async Task<IActionResult> GetAll(string? productName = null)
+    {
+        try
         {
-            _productManager = productManager;
-            _logger = logger;
+            var products = await _productManager.GetAll(productName);
+
+            return Ok(products);
         }
-
-
-       // [Route("~/api/[Controller]/Filter/{productName=}")]
-
-       [HttpGet("[controller]")]
-        public async Task<IActionResult> GetAll(string? productName = null)
+        catch (Exception ex)
         {
-            try
-            {
-                var products = await _productManager.GetAll(productName);
-
-                return Ok(products);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogCritical("",ex); // todo: fix this
-               
-                return  StatusCode((int)StatusCodes.Status500InternalServerError, ex); 
-            }
+            return this.InternalServerError(ex);
         }
     }
+
 }

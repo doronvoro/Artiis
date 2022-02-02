@@ -2,7 +2,7 @@
 
 namespace Atriis.ProductManagement.BL
 {
-    public class BestBuyService
+    public class BestBuyService // todo: IProductService
     {
         private readonly HttpClient _httpClient;
 
@@ -17,11 +17,16 @@ namespace Atriis.ProductManagement.BL
 
         public async Task<IEnumerable<Product>?> GetProductsAsync(string name)
         {
-            //todo: salePrice ? price
+            //todo:
+            // salePrice ? price
             // filter name = null
             // pageSize?
-
-
+            // create custom filter => IProduct filter
+            // get api key form config
+            // test for missing configuration
+            // test for moq filter
+            // nuget for demo product name
+            // check for map fields
             var data = await _httpClient.GetFromJsonAsync<BestBuyRoot>(
                              //"v1/products(name=\"*Greenberg*\")?pageSize=50&page=2&format=json&show=sku,name,salePrice,image,startDate&apiKey=VEu4DRF1Wwgl54oI4TerpOTq"
                              $"v1/products(name={name}*)?pageSize=50&page=2&format=json&show=sku,name,salePrice,image,startDate&apiKey=VEu4DRF1Wwgl54oI4TerpOTq"
