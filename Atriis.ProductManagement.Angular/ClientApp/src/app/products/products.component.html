@@ -1,6 +1,5 @@
 <h1 id="tableLabel">Products</h1>
 
-<p>This component demonstrates fetching data from the server......</p>
 
 <p *ngIf="!products"><em>Loading...</em></p>
 
@@ -18,7 +17,10 @@
       <td>{{ product.sku }}</td>
       <td>{{ product.name }}</td>
       <td>{{ product.price }}</td>
-      <td>{{ product.image }}</td>
+      <td>
+        {{ product.image }}
+        <img src="{{product.image}}" alt="{{product.name }}" />
+      </td>
     </tr>
   </tbody>
 </table>
