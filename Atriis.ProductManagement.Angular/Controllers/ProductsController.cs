@@ -23,6 +23,7 @@ namespace Atriis.ProductManagement.Angular.Controllers
         //fix Route 
         //[controller] => to function
         //check new error for ? nullbale
+        //'/weatherforecast' remove
         [HttpGet]
         public async Task<IActionResult> Get(string? productName = null)
         {
