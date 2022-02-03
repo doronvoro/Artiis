@@ -3,29 +3,38 @@
 
 <p *ngIf="!products">
   <em>Loading...</em>
-
-
-
-
 </p>
 
 
 <table *ngIf="products">
   <tr>
-    <td> <input type="text" [(ngModel)]="textToSearch"></td>
-    <td>  <button class="btn btn-primary" (click)="Search()">Search</button></td>
-    <td>  <button class="btn btn-primary" (click)="ClearSearch()">Clear</button></td>
-
-
-
-
+    <td> <input type="text" [(ngModel)]="textToSearch" (keyup.enter)="onEnter()" placeholder="Type for search"></td>
+     <td>  <button class="btn btn-secondary  btn-sm" (click)="ButtonSearch()">Search</button></td>
+    <td>  <button class="btn btn-secondary  btn-sm" (click)="ClearSearch()">Clear</button></td>
+    <!--<td>  <button class="btn btn-primary" (click)="ButtonSearch()">Search</button></td>
+    <td>  <button class="btn btn-primary" (click)="ClearSearch()">Clear</button></td>-->
 
   </tr>
 </table>
-
-{{pageResult.count}} |
-{{pageResult.pageIndex}} |
-{{pageResult.pageSize}} |
+<!--<table  class='table table-striped'>
+  <thead>
+    <tr>
+      <td>count  ({{Count}})</td>
+      <td>pageIndex</td>
+      <td>pageSize</td>
+      <td>totalPages</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{pageResult.count}}</td>
+      <td>{{pageResult.pageIndex}}</td>
+      <td>{{pageResult.pageSize}}</td>
+      <td>{{pageResult.totalPage}}</td>
+    </tr>
+  </tbody>
+</table>-->
+ 
 
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="products">
   <thead>
@@ -37,38 +46,29 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let product of products  | paginate: { itemsPerPage: 10, currentPage: pageNumber, totalItems:Count }">
+    <tr *ngFor="let product of products  | paginate: { itemsPerPage: 5, currentPage: pageNumber, totalItems:Count }">
       <td>{{ product.sku }}</td>
       <td>{{ product.price }}</td>
       <td>
         <!--tood: add style to css file-->
-        <img style="width:40px;height:40px" src="{{product.image}}" alt="{{product.name }}" />
+        <img style="width:40px;height:40px" src="{{product.image}}"  />
       </td>
       <td>{{ product.name }}</td>
     </tr>
-    <pagination-controls  (pageChange)="onPageChange($event)" ></pagination-controls>
   </tbody>
-</table>
-
-
-<!--<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="products">
-  <thead>
+  <tfoot>
     <tr>
-      <th>sku</th>
-      <th>price</th>
-      <th>image</th>
-      <th>name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let product of products">
-      <td>{{ product.sku }}</td>
-      <td>{{ product.price }}</td>
-      <td>-->
-        <!--tood: add style to css file-->
-        <!--<img style="width:40px;height:40px" src="{{product.image}}" alt="{{product.name }}" />
+      <td  colspan="4" >
+        <div style="text-align: center;margin-top:7px;" >
+          <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+        </div>
       </td>
-      <td>{{ product.name }}</td>
+      <!--<td colspan="3" align="center">
+    <div style="margin: auto;">
+      <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+    </div>
+  </td>-->
     </tr>
-  </tbody>
-</table>-->
+  </tfoot>
+</table>
+ 

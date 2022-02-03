@@ -10,8 +10,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 ////////////////todo: move to bl project/////////
+
+builder.Services.Configure<BestBuyServiceConfig>(
+builder.Configuration.GetSection(nameof(BestBuyServiceConfig)));
+
 builder.Services.AddHttpClient<BestBuyService>();
-builder.Services.AddTransient<IProductManager, ProductManager>();
+//.Services.AddTransient<IProductManager, ProductManager>();
+builder.Services.AddTransient<IProductService, BestBuyService>();
+
+ 
 builder.Services.AddProductManagementBL();
 //////////////////////////////////////////////
 

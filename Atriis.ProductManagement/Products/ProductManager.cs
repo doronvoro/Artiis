@@ -19,7 +19,7 @@ namespace Atriis.ProductManagement.BL
 
         public async Task<PageResult<Product>?> GetProductsDetails(PageFilter pageFilter)
         {
-            var products = await _bestBuyService.GetProductsDetails(pageFilter);
+            var products = await _bestBuyService.GetPageResult(pageFilter);
 
             return products;
         }

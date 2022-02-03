@@ -1,40 +1,26 @@
-﻿using System.Net.Http.Json;
+﻿using Microsoft.Extensions.Options;
+using System.Net.Http.Json;
 
 namespace Atriis.ProductManagement.BL
 {
-    public class PageResult<T>
-    {
-        public int Count { get; set; }
-        public int PageIndex { get; set; }
-        public int PageSize { get; set; }
-        public List<T> Items { get; set; }
-    }
-    public class PageFilter
-    {
-        public string TextToSearch { get; set; }
-        public int PageIndex { get; set; }
-        public int PageSize { get; set; }
-    }
-
-
-    public class BestBuyService // todo: IProductService
+    public class BestBuyService  : IProductService
     {
         private readonly HttpClient _httpClient;
+        private readonly BestBuyServiceConfig _serviceConfig;
 
-        public BestBuyService(HttpClient httpClient)
+        public BestBuyService(HttpClient httpClient, IOptions<BestBuyServiceConfig> options)
         {
-            var url = "https://api.bestbuy.com/";  //todo: add config option<>
-
             _httpClient = httpClient;
-
-            _httpClient.BaseAddress = new Uri(url);
+            _serviceConfig = options.Value;
+            _httpClient.BaseAddress = new Uri(_serviceConfig.BaseUrl);
         }
 
 
-        public async Task<PageResult<Product>?> GetProductsDetails(PageFilter pageFilter)
+        public async Task<PageResult<Product>?> GetPageResult(PageFilter pageFilter)
         {
-            var url = $"v1/products(name={pageFilter.TextToSearch}*)?pageSize={pageFilter.PageSize}&page={pageFilter.PageIndex}&format=json&show=sku,name,salePrice,image,startDate&apiKey=VEu4DRF1Wwgl54oI4TerpOTq";
-         
+//            var url = $"v1/products(name={pageFilter.TextToSearch}*)?pageSize={pageFilter.PageSize}&page={pageFilter.PageIndex}&format=json&show=sku,name,salePrice,image,startDate&apiKey=VEu4DRF1Wwgl54oI4TerpOTq";
+            var url = $"v1/products(name={pageFilter.TextToSearch}*)?pageSize={pageFilter.PageSize}&page={pageFilter.PageIndex}&format=json&show=sku,name,salePrice,image&apiKey={_serviceConfig.ApiKey}";
+
             var data = await _httpClient.GetFromJsonAsync<BestBuyRoot>(url );
 
             var products = data.products.Select(s => new Product
@@ -55,7 +41,8 @@ namespace Atriis.ProductManagement.BL
                 Count = data.total,
                 PageSize = pageFilter.PageSize,
                 Items = products.ToList(),
-                PageIndex = pageFilter.PageIndex  
+                PageIndex = pageFilter.PageIndex,
+                TotalPage = data.totalPages
             };
 
             return pageResult;
@@ -95,30 +82,5 @@ namespace Atriis.ProductManagement.BL
 
         }
      
-    }
-
-
-
-    public class BestBuyProduct
-    {
-        public int sku { get; set; }
-        public string name { get; set; }
-        public double salePrice { get; set; }
-        public string image { get; set; }
-        public string startDate { get; set; }
-    }
-
-    public class BestBuyRoot
-    {
-        public int from { get; set; }
-        public int to { get; set; }
-        public int currentPage { get; set; }
-        public int total { get; set; }
-        public int totalPages { get; set; }
-        public string queryTime { get; set; }
-        public string totalTime { get; set; }
-        public bool partial { get; set; }
-        public string canonicalUrl { get; set; }
-        public List<BestBuyProduct> products { get; set; }
     }
 }

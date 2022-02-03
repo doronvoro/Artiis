@@ -18,7 +18,7 @@ export class ProductsComponent implements OnInit {
 
 
   constructor(public http: HttpClient, @Inject('BASE_URL') public baseUrl: string) {
-    this.pageResult = new PageResult<Product>(0, 0, 0, []);
+    this.pageResult = new PageResult<Product>();//0, 0, 0,0, []);
   }
 
   ngOnInit(): void {
@@ -29,30 +29,27 @@ export class ProductsComponent implements OnInit {
     this.textToSearch = "";
     this.Search();
 
-  } 
+  }
+  public onEnter() {
+    this.Search();
+  }
+  public ButtonSearch() {
+    this.pageNumber = 1;
+    this.Search();
+  }
 
   public Search() {
 
-    //this.http.get<Product[]>(this.baseUrl + 'api/test')
-    //  .subscribe(result => {
-    //    this.products = result;
-    //  }, error => console.error(error));
-
-
-
-    //let params = new HttpParams().set('productName', this.textToSearch);
-
-    //this.http.get<Product[]>(this.baseUrl + 'api/products', { params: params })
-    //  .subscribe(result => {
-    //    this.products = result;
-    //  }, error => console.error(error));
-
     var p = this.textToSearch == null ? "" : this.textToSearch ;
-    let params1 = new HttpParams().set('textToSearch', this.textToSearch)
+    let params = new HttpParams().set('textToSearch', this.textToSearch)
       .set('pageIndex', this.pageNumber)
       .set('pageSize', 5);
 
-    this.http.get<PageResult<Product>>(this.baseUrl + 'api/products', { params: params1 })
+    console.log(params);
+    console.log(params.toString());
+
+
+    this.http.get<PageResult<Product>>(this.baseUrl + 'api/products', { params: params })
       .subscribe(result => {
 
         this.pageResult = result;
@@ -60,6 +57,7 @@ export class ProductsComponent implements OnInit {
 
         this.pageNumber = result.pageIndex;
         this.Count = result.count;
+     
       
     }, error => console.error(error));
 
@@ -80,7 +78,11 @@ export class ProductsComponent implements OnInit {
 
 
 class PageResult<T> {
-  constructor(public count: number, public pageIndex: number, public pageSize: number, public items: T[]) {
+  constructor(public count: number =0,
+    public pageIndex: number = 0,
+    public pageSize: number = 0,
+    public totalPage: number = 0,
+    public items: T[] = []) {
    
   }
 }

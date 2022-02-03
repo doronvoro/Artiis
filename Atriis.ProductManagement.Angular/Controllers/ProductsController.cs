@@ -7,13 +7,14 @@ namespace Atriis.ProductManagement.Angular.Controllers
     [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
-        private readonly IProductManager _productManager;
+        private readonly IProductService _productService;
         protected readonly ILogger<ProductsController> _logger;
 
-        public ProductsController(IProductManager productManager,
-                                 ILogger<ProductsController> logger)
+        public ProductsController(IProductService productService,
+                                  ILogger<ProductsController> logger)
+                                
         {
-            _productManager = productManager;
+            _productService = productService;
             _logger = logger;
         }
 
@@ -30,7 +31,7 @@ namespace Atriis.ProductManagement.Angular.Controllers
         {
             try
             {
-                var products = await _productManager.GetProductsDetails(pageFilter);
+                var products = await _productService.GetPageResult(pageFilter);
 
                 return Ok(products);
             }
