@@ -16,5 +16,12 @@ namespace Atriis.ProductManagement.BL
 
             return products;
         }
+
+        public async Task<PageResult<Product>?> GetProductsDetails(PageFilter pageFilter)
+        {
+            var products = await _bestBuyService.GetProductsDetails(pageFilter);
+
+            return products;
+        }
     }
 }

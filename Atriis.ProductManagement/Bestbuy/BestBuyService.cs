@@ -2,6 +2,21 @@
 
 namespace Atriis.ProductManagement.BL
 {
+    public class PageResult<T>
+    {
+        public int Count { get; set; }
+        public int PageIndex { get; set; }
+        public int PageSize { get; set; }
+        public List<T> Items { get; set; }
+    }
+    public class PageFilter
+    {
+        public string TextToSearch { get; set; }
+        public int PageIndex { get; set; }
+        public int PageSize { get; set; }
+    }
+
+
     public class BestBuyService // todo: IProductService
     {
         private readonly HttpClient _httpClient;
@@ -13,6 +28,37 @@ namespace Atriis.ProductManagement.BL
             _httpClient = httpClient;
 
             _httpClient.BaseAddress = new Uri(url);
+        }
+
+
+        public async Task<PageResult<Product>?> GetProductsDetails(PageFilter pageFilter)
+        {
+            var url = $"v1/products(name={pageFilter.TextToSearch}*)?pageSize={pageFilter.PageSize}&page={pageFilter.PageIndex}&format=json&show=sku,name,salePrice,image,startDate&apiKey=VEu4DRF1Wwgl54oI4TerpOTq";
+         
+            var data = await _httpClient.GetFromJsonAsync<BestBuyRoot>(url );
+
+            var products = data.products.Select(s => new Product
+            {
+                Image = s.image,
+                Name = s.name,
+                Price = s.salePrice,
+                Sku = s.sku
+            });
+
+            if(products.Count () > pageFilter.PageSize)
+            {
+                throw new Exception("pagesize not valid");
+            }
+
+            var pageResult = new PageResult<Product>
+            {
+                Count = data.total,
+                PageSize = pageFilter.PageSize,
+                Items = products.ToList(),
+                PageIndex = pageFilter.PageIndex  
+            };
+
+            return pageResult;
         }
 
         public async Task<IEnumerable<Product>?> GetProductsAsync(string name)

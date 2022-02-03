@@ -32,7 +32,7 @@ public static class ControllerBaseExten
 }
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class ProductsController : ControllerBase
 {
     private readonly IProductManager _productManager;
@@ -57,6 +57,36 @@ public class ProductsController : ControllerBase
         try
         {
             var products = await _productManager.GetAll(productName);
+
+            return Ok(products);
+        }
+        catch (Exception ex)
+        {
+            return this.InternalServerError(ex);
+        }
+    }
+    [HttpGet("[action]")]
+    public async Task<IActionResult> Test()
+    {
+        try
+        {
+
+            await Task.Delay(1);
+            return Ok(new { message = "OK!!!" });
+        }
+        catch (Exception ex)
+        {
+            return this.InternalServerError(ex);
+        }
+    }
+
+
+    [HttpGet("[action]")]
+    public async Task<IActionResult> GetProductsDetails([FromQuery] PageFilter pageFilter)
+    {
+        try
+        {
+            var products = await _productManager.GetProductsDetails(pageFilter);
 
             return Ok(products);
         }

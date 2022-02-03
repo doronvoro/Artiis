@@ -1,25 +1,57 @@
 <h1 id="tableLabel"> </h1>
 
 
-<p *ngIf="!products"><em>Loading...</em></p>
-
- 
-  <table>
-    <tr>
-      <td> <input type="text" [(ngModel)]="textToSearch"></td>
-      <td>  <button class="btn btn-primary" (click)="Search()">Search</button></td>
-      <td>  <button class="btn btn-primary" (click)="ClearSearch()">Clear</button></td>
+<p *ngIf="!products">
+  <em>Loading...</em>
 
 
 
-      
 
-    </tr>
-  </table>
- 
+</p>
 
+
+<table *ngIf="products">
+  <tr>
+    <td> <input type="text" [(ngModel)]="textToSearch"></td>
+    <td>  <button class="btn btn-primary" (click)="Search()">Search</button></td>
+    <td>  <button class="btn btn-primary" (click)="ClearSearch()">Clear</button></td>
+
+
+
+
+
+  </tr>
+</table>
+
+{{pageResult.count}} |
+{{pageResult.pageIndex}} |
+{{pageResult.pageSize}} |
 
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="products">
+  <thead>
+    <tr>
+      <th>sku</th>
+      <th>price</th>
+      <th>image</th>
+      <th>name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products  | paginate: { itemsPerPage: 10, currentPage: pageNumber, totalItems:Count }">
+      <td>{{ product.sku }}</td>
+      <td>{{ product.price }}</td>
+      <td>
+        <!--tood: add style to css file-->
+        <img style="width:40px;height:40px" src="{{product.image}}" alt="{{product.name }}" />
+      </td>
+      <td>{{ product.name }}</td>
+    </tr>
+    <pagination-controls  (pageChange)="onPageChange($event)" ></pagination-controls>
+  </tbody>
+</table>
+
+
+<!--<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="products">
   <thead>
     <tr>
       <th>sku</th>
@@ -32,11 +64,11 @@
     <tr *ngFor="let product of products">
       <td>{{ product.sku }}</td>
       <td>{{ product.price }}</td>
-      <td>
+      <td>-->
         <!--tood: add style to css file-->
-        <img style="width:40px;height:40px" src="{{product.image}}" alt="{{product.name }}" />
+        <!--<img style="width:40px;height:40px" src="{{product.image}}" alt="{{product.name }}" />
       </td>
       <td>{{ product.name }}</td>
     </tr>
   </tbody>
-</table>
+</table>-->
