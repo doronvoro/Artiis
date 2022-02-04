@@ -35,28 +35,23 @@ public static class ControllerBaseExten
 [Route("api/[controller]")]
 public class ProductsController : ControllerBase
 {
-    private readonly IProductManager _productManager;
-    protected readonly ILogger<ProductsController> _logger;
+    private readonly IProductService _productService;
+    private readonly ILogger<ProductsController> _logger;
 
-    public ProductsController(IProductManager productManager,
-                             ILogger<ProductsController> logger)
+    public ProductsController(IProductService productService,
+                              ILogger<ProductsController> logger)
+
     {
-        _productManager = productManager;
+        _productService = productService;
         _logger = logger;
     }
 
-
-    // [Route("~/api/[Controller]/Filter/{productName=}")]
-    //todo:
-    //fix Route 
-    //[controller] => to function
-    //check new error for ? nullbale
-    [HttpGet("[controller]")]
-    public async Task<IActionResult> GetAll(string? productName = null)
+    [HttpGet]
+    public async Task<IActionResult> Get([FromQuery] PageFilter pageFilter)
     {
         try
         {
-            var products = await _productManager.GetAll(productName);
+            var products = await _productService.GetPageResult(pageFilter);
 
             return Ok(products);
         }
@@ -65,30 +60,15 @@ public class ProductsController : ControllerBase
             return this.InternalServerError(ex);
         }
     }
+
     [HttpGet("[action]")]
-    public async Task<IActionResult> Test()
+    public async Task<IActionResult> GetProductDetails(int sku)
     {
         try
         {
+            var product = await _productService.GetProductDetails(sku);
 
-            await Task.Delay(1);
-            return Ok(new { message = "OK!!!" });
-        }
-        catch (Exception ex)
-        {
-            return this.InternalServerError(ex);
-        }
-    }
-
-
-    [HttpGet("[action]")]
-    public async Task<IActionResult> GetProductsDetails([FromQuery] PageFilter pageFilter)
-    {
-        try
-        {
-            var products = await _productManager.GetProductsDetails(pageFilter);
-
-            return Ok(products);
+            return Ok(product);
         }
         catch (Exception ex)
         {
@@ -97,3 +77,69 @@ public class ProductsController : ControllerBase
     }
 
 }
+//[ApiController]
+//[Route("api/[controller]")]
+//public class ProductsController : ControllerBase
+//{
+//    private readonly IProductManager _productManager;
+//    protected readonly ILogger<ProductsController> _logger;
+
+//    public ProductsController(IProductManager productManager,
+//                             ILogger<ProductsController> logger)
+//    {
+//        _productManager = productManager;
+//        _logger = logger;
+//    }
+
+
+//    // [Route("~/api/[Controller]/Filter/{productName=}")]
+//    //todo:
+//    //fix Route 
+//    //[controller] => to function
+//    //check new error for ? nullbale
+//    [HttpGet("[controller]")]
+//    public async Task<IActionResult> GetAll(string? productName = null)
+//    {
+//        try
+//        {
+//            var products = await _productManager.GetAll(productName);
+
+//            return Ok(products);
+//        }
+//        catch (Exception ex)
+//        {
+//            return this.InternalServerError(ex);
+//        }
+//    }
+//    [HttpGet("[action]")]
+//    public async Task<IActionResult> Test()
+//    {
+//        try
+//        {
+
+//            await Task.Delay(1);
+//            return Ok(new { message = "OK!!!" });
+//        }
+//        catch (Exception ex)
+//        {
+//            return this.InternalServerError(ex);
+//        }
+//    }
+
+
+//    [HttpGet("[action]")]
+//    public async Task<IActionResult> GetProductsDetails([FromQuery] PageFilter pageFilter)
+//    {
+//        try
+//        {
+//            var products = await _productManager.GetProductsDetails(pageFilter);
+
+//            return Ok(products);
+//        }
+//        catch (Exception ex)
+//        {
+//            return this.InternalServerError(ex);
+//        }
+//    }
+
+//}

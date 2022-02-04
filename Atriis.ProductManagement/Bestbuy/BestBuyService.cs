@@ -15,7 +15,6 @@ namespace Atriis.ProductManagement.BL
             _httpClient.BaseAddress = new Uri(_serviceConfig.BaseUrl);
         }
 
-
         public async Task<PageResult<Product>?> GetPageResult(PageFilter pageFilter)
         {
 //            var url = $"v1/products(name={pageFilter.TextToSearch}*)?pageSize={pageFilter.PageSize}&page={pageFilter.PageIndex}&format=json&show=sku,name,salePrice,image,startDate&apiKey=VEu4DRF1Wwgl54oI4TerpOTq";
@@ -46,6 +45,24 @@ namespace Atriis.ProductManagement.BL
             };
 
             return pageResult;
+        }
+
+        public async Task<ProductDetail> GetProductDetails(int sku)
+        {
+            var url = $"v1/products/{sku}.json?apiKey={_serviceConfig.ApiKey}";
+
+            var data = await _httpClient.GetFromJsonAsync<BestbuyProductDetailRoot>(url);
+
+            var productDetail = new ProductDetail
+            {
+                Description = data.plot,
+                Name = data.name,
+                Sku = data.sku,
+                Price = data.salePrice,
+                Images = data.images?.Select(s => s.href)?.ToArray(),
+            };
+
+            return productDetail;
         }
 
         public async Task<IEnumerable<Product>?> GetProductsAsync(string name)
@@ -81,6 +98,6 @@ namespace Atriis.ProductManagement.BL
 
 
         }
-     
+       
     }
 }

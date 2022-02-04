@@ -32,6 +32,21 @@ namespace Atriis.ProductManagement.Angular.Controllers
                 return this.InternalServerError(ex);
             }
         }
-         
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetProductDetails(int sku)
+        {
+            try
+            {
+                var products = await _productService.GetProductDetails(sku);
+
+                return Ok(products);
+            }
+            catch (Exception ex)
+            {
+                return this.InternalServerError(ex);
+            }
+        }
+
     }
 }
