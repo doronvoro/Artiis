@@ -7,7 +7,8 @@
 
 <!--{{products}}-->
 
-<table *ngIf="products" style="margin-bottom:8px;    ">
+<table *ngIf="products" style="margin-bottom:8px;">
+   
   <tr>
     <td> <input type="text" [(ngModel)]="textToSearch" (keyup.enter)="onEnter()" placeholder="Type for search"></td>
     <td>  <button class="btn btn-secondary  btn-sm" (click)="ButtonSearch()">Search</button></td>
@@ -32,7 +33,7 @@
     </tr>
   </tbody>
 </table>-->
-
+ 
 
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="products">
   <thead>
@@ -45,7 +46,10 @@
   </thead>
   <tbody>
     <tr *ngFor="let product of products  | paginate: { itemsPerPage: 5, currentPage: pageNumber, totalItems:Count }">
-      <td>{{ product.sku }}</td>
+      <td>
+        <button mat-button (click)="openDialog(product.sku)"> {{ product.sku }}</button>
+
+      </td>
       <td>{{ product.price }}</td>
       <td>
         <img class="imgProductGrid" src="{{product.image}}" />

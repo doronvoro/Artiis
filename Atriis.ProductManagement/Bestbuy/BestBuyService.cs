@@ -3,6 +3,50 @@ using System.Net.Http.Json;
 
 namespace Atriis.ProductManagement.BL
 {
+    public static class Ext
+    {
+        public static bool IsValid(this IOptions<BestBuyServiceConfig> options)
+        {
+            if (options?.Value == null)
+            {
+                return false;
+            }
+
+            if(options?.Value.ApiKey == null)
+            {
+                return false;
+
+            }
+            if (options?.Value.BaseUrl == null)
+            {
+                return false;
+
+            }
+            return true;
+        }
+    }
+
+
+    public class BestBuyProducDetail
+    {
+        public string Name { get; set; }
+        public string Type { get; set; }
+        public string StartDate { get; set; }
+
+        public double SalePrice { get; set; }
+        public string ShortDescription { get; set; }
+        public string LongDescription { get; set; }
+
+
+        public int Sku { get; set; }
+
+   
+
+        public List<Image> Images { get; set; }
+
+
+    }
+
     public class BestBuyService  : IProductService
     {
         private readonly HttpClient _httpClient;
@@ -10,6 +54,11 @@ namespace Atriis.ProductManagement.BL
 
         public BestBuyService(HttpClient httpClient, IOptions<BestBuyServiceConfig> options)
         {
+            if (!(options?.IsValid() ?? false))
+            {
+                throw new ArgumentException( $"Invalid config value {options?.Value}");
+            }
+
             _httpClient = httpClient;
             _serviceConfig = options.Value;
             _httpClient.BaseAddress = new Uri(_serviceConfig.BaseUrl);
@@ -49,17 +98,23 @@ namespace Atriis.ProductManagement.BL
 
         public async Task<ProductDetail> GetProductDetails(int sku)
         {
+            if (sku <= 0)
+            {
+                throw new ArgumentException($"Invalid sku value[sku={sku}]");
+            }
             var url = $"v1/products/{sku}.json?apiKey={_serviceConfig.ApiKey}";
 
-            var data = await _httpClient.GetFromJsonAsync<BestbuyProductDetailRoot>(url);
+            var data = await _httpClient.GetFromJsonAsync<BestBuyProducDetail>(url);
 
             var productDetail = new ProductDetail
             {
-                Description = data.plot,
-                Name = data.name,
-                Sku = data.sku,
-                Price = data.salePrice,
-                Images = data.images?.Select(s => s.href)?.ToArray(),
+                //Description = data.plot,
+                Name = data.Name,
+                Sku = data.Sku,
+                 Price = data.SalePrice,
+                Description = data.LongDescription ?? data.ShortDescription,
+
+                Images = data.Images?.Select(s => s.href)?.ToArray(),
             };
 
             return productDetail;

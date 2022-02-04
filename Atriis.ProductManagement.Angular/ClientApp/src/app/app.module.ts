@@ -12,6 +12,13 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ProductsComponent } from './products/products.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatSliderModule } from '@angular/material/slider';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ProductDetailDialogComponent } from './product-detail-dialog/product-detail-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +27,8 @@ import { ProductsComponent } from './products/products.component';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    ProductsComponent
+    ProductsComponent,
+    ProductDetailDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -33,7 +41,11 @@ import { ProductsComponent } from './products/products.component';
       //{ path: 'fetch-data', component: FetchDataComponent },
       { path: 'products', component: ProductsComponent },
 
-    ])
+    ]),
+     BrowserAnimationsModule,
+    MatSliderModule,
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

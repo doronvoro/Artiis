@@ -1,5 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+ 
+import { MatDialogModule, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ProductDetailDialogComponent } from '../product-detail-dialog/product-detail-dialog.component';
+
 
 @Component({
   selector: 'app-products',
@@ -17,7 +21,9 @@ export class ProductsComponent implements OnInit {
   textToSearch: string = '';
 
 
-  constructor(public http: HttpClient, @Inject('BASE_URL') public baseUrl: string) {
+  constructor(public http: HttpClient,
+              @Inject('BASE_URL') public baseUrl: string,
+    public dialog: MatDialog) {
     this.pageResult = new PageResult<Product>();//0, 0, 0,0, []);
   }
 
@@ -38,12 +44,21 @@ export class ProductsComponent implements OnInit {
     this.Search();
   }
 
+  public openDialog(sku : any)
+  {
+    this.dialog.open(ProductDetailDialogComponent, {
+      data: {
+        sku: sku,
+      },
+    });
+
+}
+
   public Search() {
 
-    var p = this.textToSearch == null ? "" : this.textToSearch ;
     let params = new HttpParams().set('textToSearch', this.textToSearch)
-      .set('pageIndex', this.pageNumber)
-      .set('pageSize', 5);
+                                 .set('pageIndex', this.pageNumber)
+                                 .set('pageSize', 5);
 
     console.log(params);
     console.log(params.toString());
@@ -75,6 +90,15 @@ export class ProductsComponent implements OnInit {
 
 
 }
+
+//@Component({
+//  //selector: 'dialog-data-example-dialog',
+//  //templateUrl: 'dialog-data-example-dialog.html',
+//  template :"RRRRRRRRRRRR"
+//})
+//export class DialogDataExampleDialog {
+//  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+//}
 
 
 class PageResult<T> {
