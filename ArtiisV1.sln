@@ -7,7 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artiis.API", "Artiis.API\Ar
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atriis.ProductManagement.BL", "Atriis.ProductManagement\Atriis.ProductManagement.BL.csproj", "{C26D2063-EFE6-4E33-90B6-DA75FDE29F12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atriis.ProductManagement.Angular", "Atriis.ProductManagement.Angular\Atriis.ProductManagement.Angular.csproj", "{2E3CC439-5A1F-4EFC-98FB-1F74A2E94EC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atriis.ProductManagement.Angular", "Atriis.ProductManagement.Angular\Atriis.ProductManagement.Angular.csproj", "{2E3CC439-5A1F-4EFC-98FB-1F74A2E94EC1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{700484C2-65D9-45C4-967B-C9F808A6C987}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{183C2AD4-7D7E-484C-BEE5-A6D96CF299D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atriis.ProductManagement.API.Test", "Atriis.ProductManagement.API.Test\Atriis.ProductManagement.API.Test.csproj", "{A598DA13-0654-44CA-B92B-5A3DE1A56042}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,9 +33,18 @@ Global
 		{2E3CC439-5A1F-4EFC-98FB-1F74A2E94EC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E3CC439-5A1F-4EFC-98FB-1F74A2E94EC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E3CC439-5A1F-4EFC-98FB-1F74A2E94EC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A598DA13-0654-44CA-B92B-5A3DE1A56042}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A598DA13-0654-44CA-B92B-5A3DE1A56042}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A598DA13-0654-44CA-B92B-5A3DE1A56042}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A598DA13-0654-44CA-B92B-5A3DE1A56042}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C26D2063-EFE6-4E33-90B6-DA75FDE29F12} = {700484C2-65D9-45C4-967B-C9F808A6C987}
+		{2E3CC439-5A1F-4EFC-98FB-1F74A2E94EC1} = {700484C2-65D9-45C4-967B-C9F808A6C987}
+		{A598DA13-0654-44CA-B92B-5A3DE1A56042} = {183C2AD4-7D7E-484C-BEE5-A6D96CF299D0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {45ED74B7-041B-496F-B9FF-A0AE9705EBD6}

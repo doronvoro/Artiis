@@ -8,7 +8,7 @@ namespace Atriis.ProductManagement.Angular.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
-        protected readonly ILogger<ProductsController> _logger;
+        private readonly ILogger<ProductsController> _logger;
 
         public ProductsController(IProductService productService,
                                   ILogger<ProductsController> logger)
@@ -17,14 +17,6 @@ namespace Atriis.ProductManagement.Angular.Controllers
             _productService = productService;
             _logger = logger;
         }
-
-
-        // [Route("~/api/[Controller]/Filter/{productName=}")]
-        //todo:
-        //fix Route 
-        //[controller] => to function
-        //check new error for ? nullbale
-        //'/weatherforecast' remove
 
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery]PageFilter pageFilter)
@@ -40,54 +32,6 @@ namespace Atriis.ProductManagement.Angular.Controllers
                 return this.InternalServerError(ex);
             }
         }
-
-
-        //[HttpGet]
-        //public async Task<IActionResult> Get(string? productName = null)
-        //{
-        //    try
-        //    {
-        //        var products = await _productManager.GetAll(productName);
-
-        //        return Ok(products);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return this.InternalServerError(ex);
-        //    }
-        //}
-
-
-        //[HttpGet("[action]")]
-        //public async Task<IActionResult> Test( )
-        //{
-        //    try
-        //    {
-
-        //        await Task.Delay(1);
-        //        return Ok(new  { message = "OK!!!"} );
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return this.InternalServerError(ex);
-        //    }
-        //}
-
-        //[HttpGet("[action]")]
-        //public async Task<IActionResult> GetProductsDetails([FromQuery] PageFilter pageFilter)
-        //{
-        //    try
-        //    {
-        //        var products = await _productManager.GetProductsDetails(pageFilter);
-
-        //        return Ok(products);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return this.InternalServerError(ex);
-        //    }
-        //}
-
+         
     }
-
 }

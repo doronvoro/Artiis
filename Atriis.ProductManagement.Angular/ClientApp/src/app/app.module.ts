@@ -28,9 +28,9 @@ import { ProductsComponent } from './products/products.component';
     FormsModule,
     NgxPaginationModule, 
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
+      { path: '', component: ProductsComponent, pathMatch: 'full' },
+      //{ path: 'counter', component: CounterComponent },
+      //{ path: 'fetch-data', component: FetchDataComponent },
       { path: 'products', component: ProductsComponent },
 
     ])

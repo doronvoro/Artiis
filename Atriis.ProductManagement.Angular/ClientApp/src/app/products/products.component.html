@@ -5,15 +5,13 @@
   <em>Loading...</em>
 </p>
 
+<!--{{products}}-->
 
-<table *ngIf="products">
+<table *ngIf="products" style="margin-bottom:8px;    ">
   <tr>
     <td> <input type="text" [(ngModel)]="textToSearch" (keyup.enter)="onEnter()" placeholder="Type for search"></td>
-     <td>  <button class="btn btn-secondary  btn-sm" (click)="ButtonSearch()">Search</button></td>
+    <td>  <button class="btn btn-secondary  btn-sm" (click)="ButtonSearch()">Search</button></td>
     <td>  <button class="btn btn-secondary  btn-sm" (click)="ClearSearch()">Clear</button></td>
-    <!--<td>  <button class="btn btn-primary" (click)="ButtonSearch()">Search</button></td>
-    <td>  <button class="btn btn-primary" (click)="ClearSearch()">Clear</button></td>-->
-
   </tr>
 </table>
 <!--<table  class='table table-striped'>
@@ -34,7 +32,7 @@
     </tr>
   </tbody>
 </table>-->
- 
+
 
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="products">
   <thead>
@@ -50,25 +48,19 @@
       <td>{{ product.sku }}</td>
       <td>{{ product.price }}</td>
       <td>
-        <!--tood: add style to css file-->
-        <img style="width:40px;height:40px" src="{{product.image}}"  />
+        <img class="imgProductGrid" src="{{product.image}}" />
       </td>
       <td>{{ product.name }}</td>
     </tr>
   </tbody>
   <tfoot>
     <tr>
-      <td  colspan="4" >
-        <div style="text-align: center;margin-top:7px;" >
+      <td colspan="4">
+        <div class="paginationCenter">
           <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
         </div>
       </td>
-      <!--<td colspan="3" align="center">
-    <div style="margin: auto;">
-      <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
-    </div>
-  </td>-->
     </tr>
   </tfoot>
 </table>
- 
+

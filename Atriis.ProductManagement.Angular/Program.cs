@@ -15,10 +15,9 @@ builder.Services.Configure<BestBuyServiceConfig>(
 builder.Configuration.GetSection(nameof(BestBuyServiceConfig)));
 
 builder.Services.AddHttpClient<BestBuyService>();
-//.Services.AddTransient<IProductManager, ProductManager>();
 builder.Services.AddTransient<IProductService, BestBuyService>();
 
- 
+
 builder.Services.AddProductManagementBL();
 //////////////////////////////////////////////
 
