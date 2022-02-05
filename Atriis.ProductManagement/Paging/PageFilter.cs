@@ -6,9 +6,9 @@ namespace Atriis.ProductManagement.BL
     {
         public string? TextToSearch { get; set; } = string.Empty;
       
-        [Required]
+       // todo: [Required]
         public int PageIndex { get; set; }
-        [Required]
+        // todo: [Required]
         public int PageSize { get; set; }
     }
 }

@@ -23,11 +23,11 @@ builder.Services.AddHttpClient<BestBuyService>();
 builder.Services.AddTransient<IProductService, BestBuyService>();
 
 
-builder.Services.AddProductManagementBL();
+//builder.Services.AddProductManagementBL();
 
 
 //IProductManager
-builder.Services.AddProductManagementBL();
+//builder.Services.AddProductManagementBL();
 
 var app = builder.Build();
 

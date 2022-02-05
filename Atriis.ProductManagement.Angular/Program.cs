@@ -5,20 +5,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-////////////////todo: move to bl project/////////
-
+//////////////////////////////////////////////
 builder.Services.Configure<BestBuyServiceConfig>(
 builder.Configuration.GetSection(nameof(BestBuyServiceConfig)));
-
 builder.Services.AddHttpClient<BestBuyService>();
 builder.Services.AddTransient<IProductService, BestBuyService>();
-
-
-builder.Services.AddProductManagementBL();
+//todo:use builder.Services.AddProductManagementBL();
 //////////////////////////////////////////////
 
 var app = builder.Build();
