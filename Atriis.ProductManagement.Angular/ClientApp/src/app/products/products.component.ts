@@ -16,18 +16,15 @@ export class ProductsComponent implements OnInit {
 
   public products: Product[] = [];
   public pageResult: PageResult<Product>;
-
   public pageNumber: number = 1;
   public Count: number =0;
-
   textToSearch: string = '';
-  //
   displayedColumns: string[] = ['sku', 'price', 'image', 'name'   ];
 
   constructor(public http: HttpClient,
               @Inject('BASE_URL') public baseUrl: string,
     public dialog: MatDialog) {
-    this.pageResult = new PageResult<Product>();//0, 0, 0,0, []);
+    this.pageResult = new PageResult<Product>(); 
   }
 
   ngOnInit(): void {
@@ -36,11 +33,10 @@ export class ProductsComponent implements OnInit {
 
   public ClearSearch() {
     this.textToSearch = "";
-    this.Search();
-
+    this.ButtonSearch();
   }
   public onEnter() {
-    this.Search();
+    this.ButtonSearch();
   }
   public ButtonSearch() {
     this.pageNumber = 1;
@@ -62,10 +58,8 @@ export class ProductsComponent implements OnInit {
     let params = new HttpParams().set('textToSearch', this.textToSearch)
                                  .set('pageIndex', this.pageNumber)
                                  .set('pageSize', 5);
-
-    console.log(params);
-    console.log(params.toString());
-
+     
+    //console.log(params.toString());
 
     this.http.get<PageResult<Product>>(this.baseUrl + 'api/products', { params: params })
       .subscribe(result => {
@@ -75,34 +69,17 @@ export class ProductsComponent implements OnInit {
 
         this.pageNumber = result.pageIndex;
         this.Count = result.count;
-     
-      
+           
     }, error => console.error(error));
-
 
   }
 
-
   public onPageChange = (pageNumber: any) => {
-    console.log("onPageChange");
-    console.log(pageNumber);
     this.pageNumber = pageNumber;
     this.Search();
   }
 
-
-
 }
-
-//@Component({
-//  //selector: 'dialog-data-example-dialog',
-//  //templateUrl: 'dialog-data-example-dialog.html',
-//  template :"RRRRRRRRRRRR"
-//})
-//export class DialogDataExampleDialog {
-//  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) { }
-//}
-
 
 class PageResult<T> {
   constructor(public count: number =0,
@@ -113,16 +90,7 @@ class PageResult<T> {
    
   }
 }
-
-
-//interface PageResult<T>
-//{
-//  count: number;
-//  pageIndex: number;
-//  pageSize: number;
-//  items: T[];
-//}
-
+ 
 interface Product {
   sku: number;
   name: number;

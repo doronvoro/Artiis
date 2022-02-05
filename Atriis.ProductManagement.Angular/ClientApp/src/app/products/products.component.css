@@ -1,6 +1,7 @@
 .paginationCenter {
   text-align: center;
   margin-top: 7px;
+  object-fit: cover;
 }
 .imgProductGrid {
   width: 40px;
