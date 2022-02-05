@@ -1,11 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
- 
-import { MatDialogModule, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog} from '@angular/material/dialog';
 import { ProductDetailDialogComponent } from '../product-detail-dialog/product-detail-dialog.component';
-
-//import { MatPaginator } from '@angular/material/paginator';
-//import { MatSort, SortDirection } from '@angular/material/sort';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-products',
@@ -17,13 +14,16 @@ export class ProductsComponent implements OnInit {
   public products: Product[] = [];
   public pageResult: PageResult<Product>;
   public pageNumber: number = 1;
+  public pageSize: number = 5;
+
   public Count: number =0;
   textToSearch: string = '';
-  displayedColumns: string[] = ['sku', 'price', 'image', 'name'   ];
+  sortCoulmn: string = 'sku.asc';
 
   constructor(public http: HttpClient,
+              public dialog: MatDialog,
               @Inject('BASE_URL') public baseUrl: string,
-    public dialog: MatDialog) {
+              @Inject(DOCUMENT) private document: Document  ) {
     this.pageResult = new PageResult<Product>(); 
   }
 
@@ -35,14 +35,58 @@ export class ProductsComponent implements OnInit {
     this.textToSearch = "";
     this.ButtonSearch();
   }
-  public onEnter() {
-    this.ButtonSearch();
-  }
+  
   public ButtonSearch() {
     this.pageNumber = 1;
     this.Search();
   }
 
+  public onPageChange = (pageNumber: any) => {
+    this.pageNumber = pageNumber;
+    this.Search();
+  }
+
+
+  public onPageSizeChange = (pageSize: any) => {
+    this.pageSize = pageSize;
+    this.ButtonSearch();
+  }
+
+  setColumnSortIcon(columnName: string) : any {
+
+    var up = "bi bi-arrow-up";
+    var down = "bi bi-arrow-down"
+    var arrow = "";
+    var arr = this.sortCoulmn.split('.');
+    if (arr[0] == columnName) {
+      arrow = (arr[1] == 'asc') ? up : down;
+    }     
+    var id = "sort_" + columnName;
+    var element = document.getElementById(id) as HTMLElement;;
+    element.className = arrow;// arrow;
+  }
+  public Sort(columnName: string) {
+
+    var arr = this.sortCoulmn.split('.');
+
+    if (arr[0] == columnName) {
+
+      var order = (arr[1] == 'asc') ? "dsc" : "asc";
+
+      this.sortCoulmn = `${columnName}.${order}`;
+    }
+    else {
+      this.sortCoulmn = `${columnName}.asc`;
+    }
+
+    let allowCoulmnsSort: string[] = ['sku', 'name'];
+
+    for (let item of allowCoulmnsSort) {
+      this.setColumnSortIcon(item);
+      }
+
+    this.ButtonSearch();
+  }
   public openDialog(sku : any)
   {
     this.dialog.open(ProductDetailDialogComponent, {
@@ -56,9 +100,10 @@ export class ProductsComponent implements OnInit {
   public Search() {
 
     let params = new HttpParams().set('textToSearch', this.textToSearch)
-                                 .set('pageIndex', this.pageNumber)
-                                 .set('pageSize', 5);
-     
+      .set('pageIndex', this.pageNumber)
+      .set('pageSize', this.pageSize) 
+      .set('sortCoulmn',this.sortCoulmn )
+
     //console.log(params.toString());
 
     this.http.get<PageResult<Product>>(this.baseUrl + 'api/products', { params: params })
@@ -74,10 +119,7 @@ export class ProductsComponent implements OnInit {
 
   }
 
-  public onPageChange = (pageNumber: any) => {
-    this.pageNumber = pageNumber;
-    this.Search();
-  }
+ 
 
 }
 

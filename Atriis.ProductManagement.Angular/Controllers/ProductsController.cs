@@ -20,7 +20,7 @@ namespace Atriis.ProductManagement.Angular.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery][Required] PageFilter pageFilter)
+        public async Task<IActionResult> Get([FromQuery] PageFilter pageFilter)
         {
             try
             {

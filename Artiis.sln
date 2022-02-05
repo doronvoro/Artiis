@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{700484C2-65D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{183C2AD4-7D7E-484C-BEE5-A6D96CF299D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atriis.ProductManagement.API.Test", "Atriis.ProductManagement.API.Test\Atriis.ProductManagement.API.Test.csproj", "{A598DA13-0654-44CA-B92B-5A3DE1A56042}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atriis.ProductManagement.API.Test", "Atriis.ProductManagement.API.Test\Atriis.ProductManagement.API.Test.csproj", "{A598DA13-0654-44CA-B92B-5A3DE1A56042}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

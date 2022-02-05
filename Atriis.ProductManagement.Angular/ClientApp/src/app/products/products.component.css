@@ -1,3 +1,6 @@
+
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
 .paginationCenter {
   text-align: center;
   margin-top: 7px;
@@ -7,3 +10,42 @@
   width: 40px;
   height: 40px
 }
+
+table {
+  table-layout: fixed;
+  word-wrap: break-word;
+}
+
+:host ::ng-deep .ngx-pagination .current {
+  padding: 0.1875rem 0.625rem;
+  background: #6c757d;
+  color: #fefefe;
+  cursor: default;
+}
+
+/*:host ::ng-deep .ngx-pagination .current {
+  padding: 0.1875rem 0.625rem;
+  background: red;
+  color: red;
+  cursor: default;
+}*/
+
+
+/*li.current {
+  background-color: red;
+}*/
+
+.buttonLink {
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  /*optional*/
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  color: #069;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+
+ 

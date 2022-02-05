@@ -10,5 +10,7 @@ namespace Atriis.ProductManagement.BL
         public int PageIndex { get; set; }
         // todo: [Required]
         public int PageSize { get; set; }
+
+        public string? SortCoulmn { get; set; } = string.Empty;
     }
 }

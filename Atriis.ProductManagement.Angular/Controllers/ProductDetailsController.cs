@@ -8,10 +8,10 @@ namespace Atriis.ProductManagement.Angular.Controllers
     public class ProductDetailsController : Controller
     {
         private readonly IProductService _productService;
-        private readonly ILogger<ProductsController> _logger;
+        private readonly ILogger<ProductDetailsController> _logger;
 
         public ProductDetailsController(IProductService productService,
-                                        ILogger<ProductsController> logger)
+                                        ILogger<ProductDetailsController> logger)
 
         {
             _productService = productService;

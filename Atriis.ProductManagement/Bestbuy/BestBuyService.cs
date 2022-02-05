@@ -24,7 +24,7 @@ namespace Atriis.ProductManagement.BL
         public async Task<PageResult<Product>?> GetPageResult(PageFilter pageFilter)
         {
             var url = $"v1/products(name={pageFilter.TextToSearch}*)?pageSize={pageFilter.PageSize}&page={pageFilter.PageIndex}&"+
-                      $"format=json&show=sku,name,salePrice,image&sort=sku&apiKey={_serviceConfig.ApiKey}";
+                      $"format=json&show=sku,name,salePrice,image&sort={pageFilter.SortCoulmn}&apiKey={_serviceConfig.ApiKey}";
 
             var data = await _httpClient.GetFromJsonAsync<BestBuyRoot>(url );
 
