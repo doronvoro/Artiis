@@ -8,7 +8,7 @@
 <!--{{products}}-->
 
 <table *ngIf="products" style="margin-bottom:8px;">
-   
+
   <tr>
     <td> <input type="text" [(ngModel)]="textToSearch" (keyup.enter)="onEnter()" placeholder="Type for search"></td>
     <td>  <button class="btn btn-secondary  btn-sm" (click)="ButtonSearch()">Search</button></td>
@@ -33,7 +33,39 @@
     </tr>
   </tbody>
 </table>-->
- 
+
+<table mat-table [dataSource]="products" class="mat-elevation-z8"
+           matSort matSortActive="sku" matSortDisableClear matSortDirection="desc">
+
+
+  <ng-container matColumnDef="sku">
+    <th mat-header-cell *matHeaderCellDef> sku </th>
+    <td mat-cell *matCellDef="let element"> {{element.sku}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef> price </th>
+    <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="image">
+    <th mat-header-cell *matHeaderCellDef> image </th>
+    <td mat-cell *matCellDef="let element"> <img class="imgProductGrid" src="{{element.image}}" alt="" />  </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+
+<mat-paginator [length]="20" [pageSize]="5" aria-label="Select page of GitHub search results"></mat-paginator>
+
 
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="products">
   <thead>
@@ -68,3 +100,10 @@
   </tfoot>
 </table>
 
+
+
+
+
+
+
+<!--<mat-paginator [length]="resultsLength" [pageSize]="30" aria-label="Select page of GitHub search results"></mat-paginator>-->

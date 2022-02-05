@@ -4,6 +4,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { MatDialogModule, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ProductDetailDialogComponent } from '../product-detail-dialog/product-detail-dialog.component';
 
+//import { MatPaginator } from '@angular/material/paginator';
+//import { MatSort, SortDirection } from '@angular/material/sort';
 
 @Component({
   selector: 'app-products',
@@ -19,7 +21,8 @@ export class ProductsComponent implements OnInit {
   public Count: number =0;
 
   textToSearch: string = '';
-
+  //
+  displayedColumns: string[] = ['sku', 'price', 'image', 'name'   ];
 
   constructor(public http: HttpClient,
               @Inject('BASE_URL') public baseUrl: string,

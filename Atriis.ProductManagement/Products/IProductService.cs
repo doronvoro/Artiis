@@ -1,4 +1,6 @@
-﻿namespace Atriis.ProductManagement.BL
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Atriis.ProductManagement.BL
 {
     public interface IProductService
     {

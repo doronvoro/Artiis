@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -17,8 +18,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ProductDetailDialogComponent } from './product-detail-dialog/product-detail-dialog.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
+
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort, SortDirection } from '@angular/material/sort';
+
+import { ProductDetailDialogComponent } from './product-detail-dialog/product-detail-dialog.component';
+import { MatTableModule } from '@angular/material/table'
 
 @NgModule({
   declarations: [
@@ -45,9 +52,25 @@ import { ProductDetailDialogComponent } from './product-detail-dialog/product-de
      BrowserAnimationsModule,
     MatSliderModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule,
+    ReactiveFormsModule,
+    MatPaginatorModule
+   //MatPaginator
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+
+
+//BrowserAnimationsModule,
+//  BrowserModule,
+//  FormsModule,
+//  HttpClientModule,
+//  MatNativeDateModule,
+//  MaterialExampleModule,
+//  ReactiveFormsModule,
+

@@ -1,5 +1,15 @@
- 
+
 <p>{{result.name}}({{result.sku}})</p>
+<p>{{result.type}}</p>
+
 <p>{{result.description}}</p>
-<p>{{result.images}}</p>
+<img class="imgProductGrid" style="height:70px;width:70px" src="{{result.images[0]}}" />
+
+<!--<ul>
+  <li *ngFor="let imageUrl of result.images">
+    <img class="imgProductGrid" style="height:60;width:60px" src="{{imageUrl}}" />
+</ul>-->
+
+
+
 

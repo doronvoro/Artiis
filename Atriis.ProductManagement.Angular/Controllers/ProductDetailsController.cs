@@ -1,35 +1,31 @@
 ﻿using Atriis.ProductManagement.BL;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
 
 namespace Atriis.ProductManagement.Angular.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ProductsController : Controller
+    public class ProductDetailsController : Controller
     {
         private readonly IProductService _productService;
         private readonly ILogger<ProductsController> _logger;
 
-        public ProductsController(IProductService productService,
-                                  ILogger<ProductsController> logger)
+        public ProductDetailsController(IProductService productService,
+                                        ILogger<ProductsController> logger)
 
         {
             _productService = productService;
             _logger = logger;
         }
+        
 
+        [HttpGet("[action]")]
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery][Required] PageFilter pageFilter)
+        public async Task<IActionResult> Get(int sku)
         {
             try
             {
-                if (pageFilter == null) //todo: use ModelState.IsValid
-                {
-                    throw new ArgumentNullException(nameof(pageFilter));
-                }
-
-                var products = await _productService.GetPageResult(pageFilter);
+                var products = await _productService.GetProductDetails(sku);
 
                 return Ok(products);
             }
@@ -39,5 +35,6 @@ namespace Atriis.ProductManagement.Angular.Controllers
                 return this.HandleExceptio(ex);
             }
         }
+
     }
 }

@@ -81,7 +81,7 @@ namespace Atriis.ProductManagement.BL
 
             if(products.Count () > pageFilter.PageSize)
             {
-                throw new Exception("pagesize not valid");
+                throw new Exception("pagesize not valid"); //todo: create custom Exception
             }
 
             var pageResult = new PageResult<Product>
@@ -111,7 +111,7 @@ namespace Atriis.ProductManagement.BL
                 //Description = data.plot,
                 Name = data.Name,
                 Sku = data.Sku,
-                 Price = data.SalePrice,
+                Price = data.SalePrice,
                 Description = data.LongDescription ?? data.ShortDescription,
 
                 Images = data.Images?.Select(s => s.href)?.ToArray(),
