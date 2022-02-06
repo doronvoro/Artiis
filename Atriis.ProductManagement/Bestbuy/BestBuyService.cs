@@ -3,7 +3,6 @@ using System.Net.Http.Json;
 
 namespace Atriis.ProductManagement.BL
 {
-
     public class BestBuyService  : IProductService
     {
         private readonly HttpClient _httpClient;

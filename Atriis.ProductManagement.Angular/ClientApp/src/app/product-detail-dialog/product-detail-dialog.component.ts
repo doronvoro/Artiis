@@ -19,13 +19,9 @@ export class ProductDetailDialogComponent implements OnInit {
   }
   public result: any;
 
-
   public CloseDialog() {
-    
     this.dialogRef.close();
   }
-
-   
 
   public Load() {
 

@@ -22,18 +22,7 @@ table {
   color: #fefefe;
   cursor: default;
 }
-
-/*:host ::ng-deep .ngx-pagination .current {
-  padding: 0.1875rem 0.625rem;
-  background: red;
-  color: red;
-  cursor: default;
-}*/
-
-
-/*li.current {
-  background-color: red;
-}*/
+ 
 
 .buttonLink {
   background: none !important;
@@ -46,6 +35,17 @@ table {
   text-decoration: underline;
   cursor: pointer;
 }
+
+.btnHeader {
+  padding-left: 0px;
+  color: #212529 !important;
+  float: left
+}
+
+.thHeader {
+  padding-left: 0px;
+}
+ 
 
 
  

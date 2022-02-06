@@ -7,31 +7,33 @@
 <table *ngIf="products" style="margin-bottom:8px;">
 
   <tr>
-    <td><input type="text" [(ngModel)]="textToSearch" (keyup.enter)="ButtonSearch()" placeholder="Type for search"></td>
-    <td><button class="btn btn-secondary  btn-sm" (click)="ButtonSearch()">Search</button></td>
+    <td><input type="text" [(ngModel)]="textToSearch" (keyup.enter)="onSearchClick()" placeholder="Type for search"></td>
+    <td><button class="btn btn-secondary  btn-sm" (click)="onSearchClick()">Search</button></td>
     <td><button class="btn btn-secondary  btn-sm" (click)="ClearSearch()">Clear</button></td>
   </tr>
 </table>
 
 
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="products">
+<table class='table table-hover' aria-labelledby="tableLabel" *ngIf="products">
   <thead>
     <tr>
-      <th width="10%">
-        <button mat-button (click)="Sort('sku')">
+      <th width="10%"  class="thHeader" >
+        <button class="btnHeader" mat-button (click)="Sort('sku')">
           sku <i id="sort_sku" class="bi bi-arrow-up"></i>
         </button>
       </th>
-      <th width="10%" style="padding-left: 0px;"><button mat-button disabled style="color: #212529;float:left" >price</button></th>
-      <th width="10%" style="padding-left: 0px;"><button mat-button disabled style="color: #212529;float:left">image</button></th>
-      <th>
-        <button width="70%"   mat-button (click)="Sort('name')">name </button>
-        <i id="sort_name"></i>
+      <th width="10%" class="thHeader"><button mat-button disabled class="btnHeader">price</button></th>
+      <th width="10%" class="thHeader"><button mat-button disabled class="btnHeader">image</button></th>
+      <th width="70%" class="thHeader">
+        <button class="btnHeader" mat-button (click)="Sort('name')">
+          name<i id="sort_name"></i>
+        </button>
+        
       </th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let product of products  | paginate: { itemsPerPage: pageSize, currentPage: pageNumber, totalItems:Count }">
+    <tr *ngFor="let product of products  | paginate: { itemsPerPage: pageSize, currentPage: pageNumber, totalItems:count }">
       <td>
         <button  class="buttonLink"  (click)="openDialog(product.sku)"> {{ product.sku }}</button>
       </td>
@@ -70,10 +72,10 @@
 
 
 
-<!--<table  class='table table-striped'>
+<!--<table  class='table'>
   <thead>
     <tr>
-      <td>count  ({{Count}})</td>
+      <td>count  ({{count}})</td>
       <td>pageIndex</td>
       <td>pageSize</td>
       <td>totalPages</td>
@@ -88,34 +90,3 @@
     </tr>
   </tbody>
 </table>-->
-<!--<table mat-table [dataSource]="products" class="mat-elevation-z8"
-           matSort matSortActive="sku" matSortDisableClear matSortDirection="desc">
-
-
-  <ng-container matColumnDef="sku">
-    <th mat-header-cell *matHeaderCellDef> sku </th>
-    <td mat-cell *matCellDef="let element"> {{element.sku}} </td>
-  </ng-container>-->
-<!-- Name Column -->
-<!--<ng-container matColumnDef="price">
-    <th mat-header-cell *matHeaderCellDef> price </th>
-    <td mat-cell *matCellDef="let element"> {{element.price}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="image">
-    <th mat-header-cell *matHeaderCellDef> image </th>
-    <td mat-cell *matCellDef="let element"> <img class="imgProductGrid" src="{{element.image}}" alt="" />  </td>
-  </ng-container>
-
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> name </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-
-
-<mat-paginator [length]="20" [pageSize]="5" aria-label="Select page of GitHub search results"></mat-paginator>-->
-<!--<mat-paginator [length]="resultsLength" [pageSize]="30" aria-label="Select page of GitHub search results"></mat-paginator>-->

@@ -1,39 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
 import { NgxPaginationModule } from 'ngx-pagination';
-
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { ProductsComponent } from './products/products.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
-
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort, SortDirection } from '@angular/material/sort';
-
-import { ProductDetailDialogComponent } from './product-detail-dialog/product-detail-dialog.component';
 import { MatTableModule } from '@angular/material/table'
+
+import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { ProductDetailDialogComponent } from './product-detail-dialog/product-detail-dialog.component';
+import { ProductsComponent } from './products/products.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
     ProductsComponent,
     ProductDetailDialogComponent
   ],
@@ -44,33 +30,19 @@ import { MatTableModule } from '@angular/material/table'
     NgxPaginationModule, 
     RouterModule.forRoot([
       { path: '', component: ProductsComponent, pathMatch: 'full' },
-      //{ path: 'counter', component: CounterComponent },
-      //{ path: 'fetch-data', component: FetchDataComponent },
       { path: 'products', component: ProductsComponent },
 
     ]),
      BrowserAnimationsModule,
-    MatSliderModule,
     MatButtonModule,
     MatDialogModule,
     MatTableModule,
     ReactiveFormsModule,
     MatPaginatorModule
-   //MatPaginator
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
 
-
-
-
-//BrowserAnimationsModule,
-//  BrowserModule,
-//  FormsModule,
-//  HttpClientModule,
-//  MatNativeDateModule,
-//  MaterialExampleModule,
-//  ReactiveFormsModule,
 
