@@ -1,18 +1,14 @@
-<!--<h1 id="tableLabel"> </h1>-->
-
 <p *ngIf="!products">
   <em>Loading...</em>
 </p>
 
 <table *ngIf="products" style="margin-bottom:8px;">
-
   <tr>
     <td><input type="text" [(ngModel)]="textToSearch" (keyup.enter)="onSearchClick()" placeholder="Type for search"></td>
     <td><button class="btn btn-secondary  btn-sm" (click)="onSearchClick()">Search</button></td>
     <td><button class="btn btn-secondary  btn-sm" (click)="ClearSearch()">Clear</button></td>
   </tr>
 </table>
-
 
 <table class='table table-hover' aria-labelledby="tableLabel" *ngIf="products">
   <thead>
@@ -28,7 +24,6 @@
         <button class="btnHeader" mat-button (click)="Sort('name')">
           name<i id="sort_name"></i>
         </button>
-        
       </th>
     </tr>
   </thead>
@@ -37,12 +32,12 @@
       <td>
         <button  class="buttonLink"  (click)="openDialog(product.sku)"> {{ product.sku }}</button>
       </td>
-      <td>{{ product.price }}</td>
+      <td>{{product.price}}</td>
       <td>
         <img class="imgProductGrid" src="{{product.image}}" />
       </td>
       <td>
-        {{ product.name }}
+        {{product.name}}
       </td>
     </tr>
   </tbody>
@@ -66,16 +61,10 @@
   </tfoot>
 </table>
 
-
-
-
-
-
-
 <!--<table  class='table'>
   <thead>
     <tr>
-      <td>count  ({{count}})</td>
+      <td>count</td>
       <td>pageIndex</td>
       <td>pageSize</td>
       <td>totalPages</td>

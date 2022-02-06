@@ -17,7 +17,7 @@ namespace Atriis.ProductManagement.Angular.Controllers
             _productService = productService;
             _logger = logger;
         }
-        
+
 
         [HttpGet("[action]")]
         [HttpGet]
